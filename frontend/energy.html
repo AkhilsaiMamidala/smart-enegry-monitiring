@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Energy Management</title>
+  <link rel="stylesheet" href="stylish.css">
+  <style>
+    .history-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .history-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <!-- History Button -->
+  <a href="history.html" class="history-button">History</a>
+
+  <div class="container">
+    <h1>Smart Energy Management System</h1>
+
+    <!-- Switch Section -->
+    <div class="toggle-controls">
+      <label class="switch">
+        <input type="checkbox" id="toggleSwitch">
+        <span class="slider"></span>
+      </label>
+      <p id="status">Status: Closed</p>
+    </div>
+
+    <!-- Energy Bill Details Section -->
+    <div class="energy-info">
+      <h2>Energy Bill Details</h2>
+      <p id="name">Name: -</p>
+      <p id="billId">Bill ID: -</p>
+      <p id="houseAddress">House Address: -</p>
+      <p id="energyUsed">Energy Used: -</p>
+      <p id="dateTime">Date & Time: -</p>
+      <p id="amountToPay">Amount to Pay: -</p>
+    </div>
+
+    <!-- Pay Bill Button -->
+    <button id="payBill" disabled>Pay Bill</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

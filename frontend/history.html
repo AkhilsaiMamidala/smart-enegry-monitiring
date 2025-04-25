@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction History</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    .search-box {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .search-box input {
+      width: 70%;
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .search-box button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .transaction {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .transaction h3 {
+      margin: 0 0 10px;
+    }
+    .transaction p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Transaction History</h1>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search by Name">
+      <button id="searchBtn">Search</button>
+    </div>
+    <div id="history"></div>
+  </div>
+
+  <script>
+    function loadHistory() {
+      const historyData = JSON.parse(localStorage.getItem('historyData')) || [];
+      const historyDiv = document.getElementById('history');
+      historyDiv.innerHTML = '';
+      historyData.forEach((data) => {
+        const transactionDiv = document.createElement('div');
+        transactionDiv.className = 'transaction';
+        transactionDiv.innerHTML = `
+          <h3>Transaction Hash: ${data.transactionHash}</h3>
+          <p>Name: ${data.name}</p>
+          <p>Bill ID: ${data.billId}</p>
+          <p>House Address: ${data.houseAddress}</p>
+          <p>Energy Used: ${data.energyUsed} kWh</p>
+          <p>Date & Time: ${data.dateTime}</p>
+          <p>Amount Paid: ${data.amountToPay} ETH</p>
+        `;
+        historyDiv.appendChild(transactionDiv);
+      });
+    }
+
+    function searchHistory() {
+      const searchValue = document.getElementById('searchInput').value.toLowerCase();
+      const historyData = JSON.parse(localStorage.getItem('historyData')) || [];
+      const filteredData = historyData.filter((data) =>
+        data.name.toLowerCase().includes(searchValue)
+      );
+      const historyDiv = document.getElementById('history');
+      historyDiv.innerHTML = '';
+      filteredData.forEach((data) => {
+        const transactionDiv = document.createElement('div');
+        transactionDiv.className = 'transaction';
+        transactionDiv.innerHTML = `
+          <h3>Transaction Hash: ${data.transactionHash}</h3>
+          <p>Name: ${data.name}</p>
+          <p>Bill ID: ${data.billId}</p>
+          <p>House Address: ${data.houseAddress}</p>
+          <p>Energy Used: ${data.energyUsed} kWh</p>
+          <p>Date & Time: ${data.dateTime}</p>
+          <p>Amount Paid: ${data.amountToPay} ETH</p>
+        `;
+        historyDiv.appendChild(transactionDiv);
+      });
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', searchHistory);
+    window.onload = loadHistory;
+  </script>
+</body>
+</html>
